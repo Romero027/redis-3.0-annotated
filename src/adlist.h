@@ -74,7 +74,7 @@ typedef struct list {
     listNode *tail;
 
     // 节点值复制函数
-    void *(*dup)(void *ptr);
+    void *(*dup)(void *ptr); // Function pointer 我认为这里应该是方便user define dup function
 
     // 节点值释放函数
     void (*free)(void *ptr);

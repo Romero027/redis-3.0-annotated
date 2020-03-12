@@ -46,6 +46,7 @@ typedef char *sds;
 
 /*
  * 保存字符串对象的结构
+ * 注意 sdshdr 只会占据8bytes的空间 因为flexible array members
  */
 struct sdshdr {
     
@@ -65,7 +66,7 @@ struct sdshdr {
  * T = O(1)
  */
 static inline size_t sdslen(const sds s) {
-    struct sdshdr *sh = (void*)(s-(sizeof(struct sdshdr)));
+    struct sdshdr *sh = (void*)(s-(sizeof(struct sdshdr))); // 减去sizeof(sdshdr)因为 sds本身指向sdshdr里的buf
     return sh->len;
 }
 
